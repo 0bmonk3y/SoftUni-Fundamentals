@@ -1,0 +1,66 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+namespace MidExamJune
+{
+    class Program
+    {
+        static void Main()
+        {
+            List<string> listOfCars = Console.ReadLine().Split(">>").ToList();
+            int totalTaxes = 0;
+ 
+            for (int indexFromListOfAllCars = 0; indexFromListOfAllCars < listOfCars.Count; indexFromListOfAllCars++)
+            {
+                string currCarAllElements = listOfCars[indexFromListOfAllCars];
+                string[] allCarElements = currCarAllElements.Split(' ');
+                string carType = allCarElements[0];
+                int yearsToBePaid = int.Parse(allCarElements[1]);
+                int kilometres = int.Parse(allCarElements[2]);
+                switch (carType)
+                {
+                    case "family":
+                        int familyTax = 0;
+                        familyTax = 50;
+                        familyTax -= 5 * yearsToBePaid;
+                        int countIncreaseF = kilometres / 3000;
+                        if (countIncreaseF > 0)
+                        {
+                            familyTax += countIncreaseF * 12;
+                        }
+                        totalTaxes += familyTax;
+                        Console.WriteLine($"A family car will pay {familyTax:f2} euros in taxes.");
+                        break;
+                    case "heavyDuty":
+                        int heavyDutyTax = 0;
+                        heavyDutyTax = 80;
+                        heavyDutyTax -= 8 * yearsToBePaid;
+                        int countIncreaseH = kilometres / 9000;
+                        if (countIncreaseH > 0)
+                        {
+                            heavyDutyTax += countIncreaseH * 14;
+                        }
+                        totalTaxes += heavyDutyTax;
+                        Console.WriteLine($"A heavyDuty car will pay {heavyDutyTax:f2} euros in taxes.");
+                        break;
+                    case "sports":
+                        int sportsTax = 0;
+                        sportsTax = 100;
+                        sportsTax -= 9 * yearsToBePaid;
+                        int countIncreaseS = kilometres / 2000;
+                        if (countIncreaseS > 0)
+                        {
+                            sportsTax += countIncreaseS * 18;
+                        }
+                        totalTaxes += sportsTax;
+                        Console.WriteLine($"A sports car will pay {sportsTax:f2} euros in taxes.");
+                        break;
+                    default:     
+                        Console.WriteLine("Invalid car type.");
+                        break;  
+                }
+            }
+            Console.WriteLine($"The National Revenue Agency will collect {totalTaxes:f2} euros in taxes.");
+        }
+    }
+}
